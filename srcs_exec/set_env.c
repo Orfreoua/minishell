@@ -48,7 +48,6 @@ char	**set_empty_env(void)
 	char	**new_env;
 
 	new_env = malloc(sizeof(char *) * 3);
-
 	if (!new_env)
 		return (free_env_error(new_env, 0));
 	new_env[0] = ft_strdup("PWD=");
