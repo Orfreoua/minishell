@@ -50,9 +50,6 @@ void	routine(t_exec *exec, char *line)
 		{
 			if (execution(data, exec) == ERROR)
 			{
-				if (g_exit_ret == 424242)
-					g_exit_ret = 130;
-				return ;
 			}
 		}
 		free_string(line);

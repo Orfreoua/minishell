@@ -12,7 +12,7 @@
 
 #include "../headers/minishell.h"
 
-int	init_namefile_and_fd(t_exec *exec)
+int	init_file_heredoc(t_exec *exec)
 {
 	exec->hd.tab_of_name_file = malloc(sizeof(char *)
 			* exec->hd.nb + 1);
@@ -81,33 +81,16 @@ int	load_heredoc(t_data *data, t_exec *exec)
 	exec->hd.nb = count_nb_heredoc(data);
 	if (!exec->hd.nb)
 		return (OK);
-	if (init_tab_exitcode(data, exec) == ERROR
-		|| init_namefile_and_fd(exec) == ERROR)
+	exec->hd.tab_exit_code = NULL;
+	if (init_tab_exitcode(data, exec) == ERROR)
 		return (print_error("init_heredoc.c"));
+	if (init_file_heredoc(exec) == ERROR)
+	{
+		free_tab(exec->hd.tab_exit_code);
+		return (print_error("init_heredoc.c"));
+	}
 	i = 0;
 	while (i < exec->hd.nb)
-	{
-		if (heredoc(exec, i) == ERROR)
-			return (print_error("init_heredoc.c"));
-		i++;
-	}
+		heredoc(exec, i++);
 	return (OK);
 }
-
-/*void	feature(t_exec *exec, t_data *slot)
-{
-	t_data	*slott;
-
-	slott = slot;
-	while (slott && slott->token != PIPE)
-	{
-		if (is_redir(slott))
-		{
-			exec->pipe.cmd = malloc(sizeof(char) * 1);
-			exec->pipe.cmd[0] = 0;
-			break ;
-		}
-		if (slott)
-			slott = slott->suiv;
-	}
-}*/

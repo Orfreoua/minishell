@@ -67,11 +67,10 @@ int	execution(t_data *data, t_exec *exec)
 {
 	int			i;
 
-	if (load_heredoc(data, exec) == ERROR || g_exit_ret == 424242)
+	if (load_heredoc(data, exec) == ERROR)
 	{
 		free_tab(exec->env);
 		gest_error(END, data);
-		free_heredoc(exec);
 		return (ERROR);
 	}
 	exec->pipe.nb_pipe = count_nb_pipe(data);

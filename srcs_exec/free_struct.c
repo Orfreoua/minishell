@@ -25,4 +25,5 @@ void	free_heredoc(t_exec *exec)
 	free(exec->hd.tab_fd);
 	free_tab(exec->hd.tab_of_name_file);
 	free_tab(exec->hd.tab_exit_code);
+	exec->hd.nb = 0;
 }

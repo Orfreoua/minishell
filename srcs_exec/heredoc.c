@@ -88,6 +88,7 @@ int	to_fill_heredoc(int i, t_exec *exec)
 			}
 		}
 	}
+    free(contents);
 	return (OK);
 }
 
@@ -99,6 +100,6 @@ int	heredoc(t_exec *exec, int i)
 		return (ERROR);
 	if (to_fill_heredoc(i, exec) == ERROR)
 		return (ERROR);
-	//free_string(contents);
+    signal_catching_mode(INTERACTIVE);
 	return (OK);
 }

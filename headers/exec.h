@@ -86,7 +86,7 @@ t_data	*pass_hold_pipe(t_data *data, int cpt_pipe);
 int		execution(t_data *data, t_exec *exec);
 int		load_pipe(t_data *data, t_exec	*exec, int cpt_pipe);
 //heredoc_init.c
-int		init_namefile_and_fd(t_exec *exec);
+int		init_file_heredoc(t_exec *exec);
 int		init_tab_exitcode(t_data *data, t_exec *exec);
 int		count_nb_heredoc(t_data *data);
 int		load_heredoc(t_data *data, t_exec *exec);
