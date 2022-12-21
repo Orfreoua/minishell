@@ -43,7 +43,7 @@ char	**fill_tab(char *s, int count, char sep)
 		return (0);
 	end = 0;
 	i = 0;
-	while (s && s[end]== sep)
+	while (s && s[end] == sep)
 			end++;
 	while (i < count)
 	{

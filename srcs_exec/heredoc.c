@@ -69,8 +69,6 @@ int	to_fill_heredoc(int i, t_exec *exec)
 	{
 		start = 1;
 		s = readline("> ");
-		if (g_exit_ret == 424242)
-			return (OK);
 		if (!s || !strcmp(s, exec->hd.tab_exit_code[i]))
 		{
 			write(exec->hd.tab_fd[i], contents, ft_strlen(contents));

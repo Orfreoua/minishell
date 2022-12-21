@@ -90,7 +90,8 @@ int	redir(t_data *data, t_exec *exec, int cpt_pipe)
 			if (slot->token == D_L_REDIR)
 			{
 				good_heredoc_to_redir(exec, slot);
-				if (do_redir(slot->token, exec->hd.tab_of_name_file[exec->hd.cpt], exec) == ERROR)
+				if (do_redir(slot->token,
+						exec->hd.tab_of_name_file[exec->hd.cpt], exec) == ERROR)
 					return (ERROR);
 			}
 			else if (do_redir(slot->token, slot->suiv->str, exec) == ERROR)
