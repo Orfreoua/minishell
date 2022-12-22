@@ -79,12 +79,9 @@ int	to_fill_heredoc(int i, t_exec *exec)
 		}
 		else
 		{
-			if (ft_strlen(s))
-			{
-				contents = add_contents(contents, s);
-				if (!contents)
-					return (print_error("2 heredoc()"));
-			}
+			contents = add_contents(contents, s);
+			if (!contents)
+				return (print_error("2 heredoc()"));
 		}
 	}
 	free(contents);
