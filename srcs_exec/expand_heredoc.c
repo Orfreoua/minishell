@@ -6,7 +6,7 @@
 /*   By: akefeder <akefeder@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:55:21 by akefeder          #+#    #+#             */
-/*   Updated: 2022/12/22 20:35:30 by akefeder         ###   ########.fr       */
+/*   Updated: 2022/12/22 21:04:22 by akefeder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ char	*ft_heredoc_expand(char *str, char **env)
 	char	**exp;
 	int		i;
 
-	
 	if (str && ft_compare_char(str, '$') == FOUND)
 	{
 		i = 0;
