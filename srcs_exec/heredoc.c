@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orfreoua <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akefeder <akefeder@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 14:57:55 by orfreoua          #+#    #+#             */
-/*   Updated: 2022/12/09 14:57:58 by orfreoua         ###   ########.fr       */
+/*   Updated: 2022/12/22 20:35:23 by akefeder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int	to_fill_heredoc(int i, t_exec *exec)
 		}
 		else
 		{
+			s = ft_heredoc_expand(s, exec->env);
+			//return error malloc
 			contents = add_contents(contents, s);
 			if (!contents)
 				return (print_error("2 heredoc()"));

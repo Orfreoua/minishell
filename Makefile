@@ -29,6 +29,7 @@ FILES_EXEC		=	signals.c\
 					exec.c\
 					heredoc_init.c\
 					heredoc.c\
+					expand_heredoc.c\
 					get_cmd.c\
 					redir.c\
 					wait.c\

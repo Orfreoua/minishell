@@ -6,7 +6,7 @@
 /*   By: akefeder <akefeder@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:22:36 by akefeder          #+#    #+#             */
-/*   Updated: 2022/10/30 20:41:58 by akefeder         ###   ########.fr       */
+/*   Updated: 2022/12/22 20:07:28 by akefeder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ char	**ft_split_exp(char *str)
 	int		dollar;
 
 	exp = NULL;
-	cpt[0] = 0;
-	cpt[1] = 0;
-	cpt[2] = 0;
+	cpt[0] = 0; // parcours i
+	cpt[1] = 0; // parcours depuis le dernier trouve
+	cpt[2] = 0;	// retour du cas
 	dollar = 0;
 	while (str[cpt[0]] != '\0')
 	{

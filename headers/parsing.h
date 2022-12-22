@@ -6,7 +6,7 @@
 /*   By: akefeder <akefeder@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 01:18:10 by akefeder          #+#    #+#             */
-/*   Updated: 2022/12/10 21:12:13 by akefeder         ###   ########.fr       */
+/*   Updated: 2022/12/22 20:33:47 by akefeder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ char	**ft_split_exp(char *str);
 void	ft_join_arg(t_data *data);
 t_data	*ft_last_error(t_data *data);
 int		ft_cmp_token(t_data *data);
+char	*modif_exp(char **exp, int j, char **env);
 void	ft_token(t_data *data);
 char	*interro_case(char **exp, int i);
 char	*ft_itoa(int n);

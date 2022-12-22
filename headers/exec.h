@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orfreoua <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akefeder <akefeder@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 17:28:12 by orfreoua          #+#    #+#             */
-/*   Updated: 2022/10/24 17:28:14 by orfreoua         ###   ########.fr       */
+/*   Updated: 2022/12/22 20:30:54 by akefeder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ int		to_fill_heredoc(int i, t_exec *exec);
 int		heredoc(t_exec *exec, int i);
 char	*add_contents(char *contents, char *s);
 char	*gen_name(t_exec *exec, int i);
+//expand_heredoc.c
+char	*ft_heredoc_expand(char *str, char **env);
 //free_struct.c
 void	free_heredoc(t_exec *exec);
 void	free_pipe(t_exec *exec);
