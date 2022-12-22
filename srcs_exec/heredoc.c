@@ -12,7 +12,7 @@
 
 #include "../headers/minishell.h"
 
-int	create_file(char *filename)
+int	create_file(char *filename, t_exec *exec)
 {
 	int	fd;
 
@@ -20,6 +20,7 @@ int	create_file(char *filename)
 			S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH, 0744);
 	if (fd == -1)
 		return (print_error("file creation failed"));
+	exec->hd.cpt_close++;
 	return (fd);
 }
 
@@ -72,7 +73,7 @@ int	to_fill_heredoc(int i, t_exec *exec)
 		if (!s || !strcmp(s, exec->hd.tab_exit_code[i]))
 		{
 			write(exec->hd.tab_fd[i], contents, ft_strlen(contents));
-			if (!s)
+			if (!s && g_exit_ret != 424242)
 				print_error_heredoc(exec, i);
 			break ;
 		}
@@ -92,12 +93,20 @@ int	to_fill_heredoc(int i, t_exec *exec)
 
 int	heredoc(t_exec *exec, int i)
 {
+	int	hold_fd;
+
+	hold_fd = dup(STDIN_FILENO);
 	signal_catching_mode(HEREDOC);
-	exec->hd.tab_fd[i] = create_file(gen_name(exec, i));
+	exec->hd.tab_fd[i] = create_file(gen_name(exec, i), exec);
 	if (exec->hd.tab_fd[i] == ERROR)
 		return (ERROR);
 	if (to_fill_heredoc(i, exec) == ERROR)
 		return (ERROR);
 	signal_catching_mode(INTERACTIVE);
+	if (g_exit_ret == 424242)
+		free_heredoc(exec);
+	dup2(hold_fd, STDIN_FILENO);
+	close(hold_fd);
+	exec->hd.cpt++;
 	return (OK);
 }

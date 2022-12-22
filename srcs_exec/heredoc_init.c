@@ -90,7 +90,7 @@ int	load_heredoc(t_data *data, t_exec *exec)
 		return (print_error("init_heredoc.c"));
 	}
 	i = 0;
-	while (i < exec->hd.nb)
+	while (g_exit_ret != 424242 && i < exec->hd.nb)
 		heredoc(exec, i++);
 	return (OK);
 }

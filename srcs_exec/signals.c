@@ -18,8 +18,7 @@ static void	sigint_heredoc(int sig_num)
 	{
 		write(1, "\n", 1);
 		close(STDIN_FILENO);
-		rl_redisplay();
-		g_exit_ret = 130;
+		g_exit_ret = 424242;
 	}
 }
 

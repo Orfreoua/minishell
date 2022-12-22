@@ -76,8 +76,8 @@ CC 		= clang
 RM 		= rm -f
 
 #valgrind --trace-children=yes --track-fds=yes -fsanitize=address valgrind --leak-check=full -fsanitize=address
-# make && valgrind --log-file=toto --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=ignore_leak_rl ./minishell
-CFLAGS	= -Wall -Wextra -Werror #-g3 #-fsanitize=leak
+# make re && valgrind --log-file=toto --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=ignore_leak_rl ./minishell
+CFLAGS	= -Wall -Wextra -Werror -g3 #-fsanitize=leak
 
 all:		${NAME}
 

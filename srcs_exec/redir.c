@@ -73,6 +73,12 @@ void	good_heredoc_to_redir(t_exec *exec, t_data *slot)
 			slot = slot->suiv->suiv;
 			exec->hd.cpt++;
 		}
+		else if (slot->suiv->suiv && slot->suiv->suiv->suiv &&
+			slot->suiv->suiv->suiv->token == D_L_REDIR)
+		{
+			slot = slot->suiv->suiv->suiv;
+			exec->hd.cpt++;		
+		}
 		else
 			return ;
 	}
@@ -82,6 +88,7 @@ int	redir(t_data *data, t_exec *exec, int cpt_pipe)
 {
 	t_data	*slot;
 
+	exec->hd.cpt = 0;
 	slot = pass_hold_pipe(data, cpt_pipe);
 	while (slot && slot->token != PIPE)
 	{

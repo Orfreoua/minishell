@@ -63,15 +63,24 @@ int	load_pipe(t_data *data, t_exec	*exec, int cpt_pipe)
 	return (OK);
 }
 
+int	hd_error(t_data *data, t_exec *exec)
+{
+	free_tab(exec->env);
+	gest_error(END, data);
+	return (ERROR);
+}
+
 int	execution(t_data *data, t_exec *exec)
 {
 	int			i;
 
 	if (load_heredoc(data, exec) == ERROR)
+		hd_error(data, exec);
+	if (g_exit_ret == 424242)
 	{
-		free_tab(exec->env);
 		gest_error(END, data);
-		return (ERROR);
+		g_exit_ret = 130;
+		return (OK);
 	}
 	exec->pipe.nb_pipe = count_nb_pipe(data);
 	i = 0;

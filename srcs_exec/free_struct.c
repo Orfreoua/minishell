@@ -24,17 +24,17 @@ void	free_pipe(t_exec *exec)
 void	free_heredoc(t_exec *exec)
 {
 	int	i;
-
 	if (!exec->hd.nb)
 		return ;
 	i = 0;
-	while (i < exec->hd.nb)
+	while (i < exec->hd.cpt_close)
 	{
 		close(exec->hd.tab_fd[i]);
 		i++;
 	}
 	free(exec->hd.tab_fd);
-	free_tab(exec->hd.tab_of_name_file);
+	free_tab_error(exec->hd.tab_of_name_file, exec->hd.cpt_close);
 	free_tab(exec->hd.tab_exit_code);
 	exec->hd.nb = 0;
+	exec->hd.cpt_close = 0;
 }

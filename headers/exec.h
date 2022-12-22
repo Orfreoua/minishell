@@ -24,8 +24,8 @@ typedef struct s_heredoc
 {
 	int		nb;
 	int		cpt;
+	int		cpt_close;
 	int		*tab_fd;
-	char	*contents;
 	char	**tab_of_name_file;
 	char	**tab_exit_code;
 }	t_heredoc;
@@ -92,7 +92,7 @@ int		count_nb_heredoc(t_data *data);
 int		load_heredoc(t_data *data, t_exec *exec);
 void	feature(t_exec *exec, t_data *slot);
 //heredoc.c
-int		create_file(char *filename);
+int		create_file(char *filename, t_exec *exec);
 int		to_fill_heredoc(int i, t_exec *exec);
 int		heredoc(t_exec *exec, int i);
 char	*add_contents(char *contents, char *s);

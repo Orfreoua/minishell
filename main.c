@@ -28,6 +28,7 @@ int	init_exec(t_exec *exec)
 	exec->hd.tab_exit_code = NULL;
 	g_exit_ret = 0;
 	exec->status = 0;
+	exec->hd.cpt_close = 0;
 	return (OK);
 }
 
