@@ -24,6 +24,7 @@ void	free_pipe(t_exec *exec)
 void	free_heredoc(t_exec *exec)
 {
 	int	i;
+
 	if (!exec->hd.nb)
 		return ;
 	i = 0;
@@ -37,4 +38,13 @@ void	free_heredoc(t_exec *exec)
 	free_tab(exec->hd.tab_exit_code);
 	exec->hd.nb = 0;
 	exec->hd.cpt_close = 0;
+}
+
+int	free_history_end(t_exec *exec, t_data *data, int i)
+{
+	free_heredoc(exec);
+	close_and_wait(exec, i);
+	wait_children(exec, i);
+	gest_error(END, data);
+	return (OK);
 }

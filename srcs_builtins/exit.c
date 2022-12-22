@@ -19,6 +19,7 @@ void	free_exit(t_exec *exec, t_data *data)
 	free(exec->pipe.cmd);
 	gest_error(END, data);
 	free_heredoc(exec);
+	ft_putstr_fd(2, "exit\n");
 	exit(g_exit_ret);
 }
 

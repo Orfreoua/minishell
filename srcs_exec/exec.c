@@ -70,6 +70,13 @@ int	hd_error(t_data *data, t_exec *exec)
 	return (ERROR);
 }
 
+int	ctrl_c_hd(t_data *data)
+{
+	gest_error(END, data);
+	g_exit_ret = 130;
+	return (OK);
+}
+
 int	execution(t_data *data, t_exec *exec)
 {
 	int			i;
@@ -77,11 +84,7 @@ int	execution(t_data *data, t_exec *exec)
 	if (load_heredoc(data, exec) == ERROR)
 		hd_error(data, exec);
 	if (g_exit_ret == 424242)
-	{
-		gest_error(END, data);
-		g_exit_ret = 130;
-		return (OK);
-	}
+		return (ctrl_c_hd(data));
 	exec->pipe.nb_pipe = count_nb_pipe(data);
 	i = 0;
 	while (i < exec->pipe.nb_pipe + 1)
@@ -94,13 +97,8 @@ int	execution(t_data *data, t_exec *exec)
 		}
 		if (load_struct_pipe(data, exec, i) == ERROR)
 			return (print_error("load_pipe()"));
-		load_pipe(data, exec, i);
+		load_pipe(data, exec, i++);
 		free_pipe(exec);
-		i++;
 	}
-	free_heredoc(exec);
-	close_and_wait(exec, i);
-	wait_children(exec, i);
-	gest_error(END, data);
-	return (OK);
+	return (free_history_end(exec, data, i));
 }

@@ -102,6 +102,7 @@ char	*ft_heredoc_expand(char *str, char **env);
 //free_struct.c
 void	free_heredoc(t_exec *exec);
 void	free_pipe(t_exec *exec);
+int		free_history_end(t_exec *exec, t_data *data, int i);
 //get_cmd.c
 int		is_cat_cmd(t_data *data);
 int		get_cmd(t_data	*slot, t_exec *exec);

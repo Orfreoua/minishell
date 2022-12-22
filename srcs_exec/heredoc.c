@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akefeder <akefeder@student.42.fr>          +#+  +:+       +#+        */
+/*   By: orfreoua <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/09 14:57:55 by orfreoua          #+#    #+#             */
-/*   Updated: 2022/12/22 20:35:23 by akefeder         ###   ########.fr       */
+/*   Created: 2022/12/22 21:07:20 by orfreoua          #+#    #+#             */
+/*   Updated: 2022/12/22 21:07:24 by orfreoua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,20 @@ char	*add_contents(char *contents, char *s)
 	return (contents);
 }
 
+/*int	fill_heredoc(char *s, t_exec *exec, char *contents)
+{
+	s = ft_heredoc_expand(s, exec->env);
+	if (!s)
+	{
+		free_string(contents);
+		return (print_error("2 heredoc()"));
+	}
+	contents = add_contents(contents, s);
+	if (!contents)
+		return (print_error("3 heredoc()"));
+	return (OK);
+}*/
+
 int	to_fill_heredoc(int i, t_exec *exec)
 {
 	char	*s;
@@ -80,10 +94,14 @@ int	to_fill_heredoc(int i, t_exec *exec)
 		else
 		{
 			s = ft_heredoc_expand(s, exec->env);
-			//return error malloc
+			if (!s)
+			{
+				free_string(contents);
+				return (print_error("2 heredoc()"));
+			}
 			contents = add_contents(contents, s);
 			if (!contents)
-				return (print_error("2 heredoc()"));
+				return (print_error("3 heredoc()"));
 		}
 	}
 	free(contents);
