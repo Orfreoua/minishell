@@ -91,7 +91,10 @@ int	to_fill_heredoc(int i, t_exec *exec)
 			if (!contents)
 				return (print_error("3 heredoc()"));
 		}
+		free(s);
 	}
+	if (s)
+		free(s);
 	free(contents);
 	return (OK);
 }

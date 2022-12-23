@@ -87,7 +87,7 @@ all:		${NAME}
 
 ${NAME}:	${OBJS} 
 			$(CC) $(CFLAGS) $(OBJS) -lreadline -o $(NAME)
-			# mv $(OBJS) build
+			 #mv $(OBJS) build
 del_temp:		
 		rm -rf temp*
 

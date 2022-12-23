@@ -121,20 +121,17 @@ int	redir_in(t_data *data, t_exec *exec)
 		if (data->token == D_L_REDIR || data->token == S_L_REDIR)
 		{
 			if (data->token == D_L_REDIR)
-			{
-				exec->hd.cpt++;
-			}
+				exec->hd.cpt_file++;
 			tmp = data;
 		}
 		data = data->suiv;
 	}
-	
 	if (tmp)
 	{
 		if (tmp->token == D_L_REDIR)
 		{
 			if (do_redir(tmp->token,
-						exec->hd.tab_of_name_file[exec->hd.cpt], exec) == ERROR)
+						exec->hd.tab_of_name_file[exec->hd.cpt_file], exec) == ERROR)
 					return (ERROR);
 			return (OK);
 		}
@@ -163,6 +160,27 @@ int	redir_out(t_data *data, t_exec *exec)
 	return (OK);
 }
 
+int	good_pos_hd(t_data *data, int cpt_pipe)
+{
+	t_data	*slot;
+	int		i;
+	int		pos_hd;
+
+	pos_hd = 0;
+	i = 0;
+	slot = data;
+
+	while (slot && i < cpt_pipe)
+	{
+		if (slot->token == PIPE)
+			i++;
+		if (slot->token == D_L_REDIR)
+			pos_hd++;
+		slot = slot->suiv;
+	}
+	return (pos_hd - 1);
+}
+
 int	redir(t_data *data, t_exec *exec, int cpt_pipe)
 {
 	t_data	*slot;
@@ -170,6 +188,7 @@ int	redir(t_data *data, t_exec *exec, int cpt_pipe)
 	
 	slot = data;
 	slot2 = data;
+	exec->hd.cpt_file = good_pos_hd(data, cpt_pipe);
 	slot = pass_hold_pipe(data, cpt_pipe);
 	slot2 = pass_hold_pipe(data, cpt_pipe);
 	if (redir_in(slot, exec) == ERROR)

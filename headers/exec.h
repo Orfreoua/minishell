@@ -24,6 +24,7 @@ typedef struct s_heredoc
 {
 	int		nb;
 	int		cpt;
+	int		cpt_file;
 	int		cpt_close;
 	int		*tab_fd;
 	char	**tab_of_name_file;
