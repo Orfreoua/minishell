@@ -81,6 +81,7 @@ int	execution(t_data *data, t_exec *exec)
 {
 	int			i;
 
+	exec->hd.cpt = -2;
 	if (load_heredoc(data, exec) == ERROR)
 		hd_error(data, exec);
 	if (g_exit_ret == 424242)
