@@ -20,12 +20,13 @@ int	is_redir(t_data *slot)
 	return (0);
 }
 
-void	error_fd_dosent_exist(char *filename)
+int	error_fd_dosent_exist(char *filename)
 {
 	ft_putstr_fd(2, "minishell : ");
 	ft_putstr_fd(2, filename);
 	ft_putstr_fd(2, " : No such file or directory\n");
 	g_exit_ret = 1;
+	exit(1);
 }
 
 int	openfile(char *filename, int mode)
@@ -35,12 +36,12 @@ int	openfile(char *filename, int mode)
 	if (!mode)
 	{
 		if (access(filename, F_OK))
-			error_fd_dosent_exist(filename);
+			return (error_fd_dosent_exist(filename));
 		fd = open(filename, O_RDONLY);
 		if (fd == -1)
 		{
 			close(fd);
-			return (0);
+			exit(1);
 		}
 		return (fd);
 	}
