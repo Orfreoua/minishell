@@ -12,14 +12,15 @@
 
 #include "../headers/minishell.h"
 
-void	check_redir(t_data *data, t_data *tmp, t_exec *exec)
+int	is_redir_in(t_data *data, t_exec *exec)
 {
 	if (data->token == D_L_REDIR || data->token == S_L_REDIR)
 	{
 		if (data->token == D_L_REDIR)
 			exec->hd.cpt_file++;
-		tmp = data;
+		return (1);
 	}
+	return (0);
 }
 
 int	redir_in(t_data *data, t_exec *exec)
@@ -29,7 +30,8 @@ int	redir_in(t_data *data, t_exec *exec)
 	tmp = NULL;
 	while (data && data->token != PIPE)
 	{
-		check_redir(data, tmp, exec);
+		if (is_redir_in(data, exec))
+			tmp = data;
 		data = data->suiv;
 	}
 	if (tmp)
