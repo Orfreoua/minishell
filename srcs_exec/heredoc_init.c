@@ -32,7 +32,7 @@ char	*gen_name(t_exec *exec, int i)
 int	init_file_heredoc(t_exec *exec)
 {
 	exec->hd.tab_of_name_file = malloc(sizeof(char *)
-			* exec->hd.nb + 1);
+			* (exec->hd.nb + 1));
 	if (!exec->hd.tab_of_name_file)
 	{
 		free_tab(exec->hd.tab_exit_code);
@@ -54,7 +54,7 @@ int	init_tab_exitcode(t_data *data, t_exec *exec)
 	int		i;
 
 	slot = data;
-	exec->hd.tab_exit_code = malloc(sizeof(char *) * exec->hd.nb + 1);
+	exec->hd.tab_exit_code = malloc(sizeof(char *) * (exec->hd.nb + 1));
 	if (!exec->hd.tab_exit_code)
 		return (print_error("(l:42) malloc failed 1"));
 	i = 0;
