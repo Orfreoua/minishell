@@ -12,16 +12,21 @@
 
 #include "../headers/minishell.h"
 
-int	create_file(char *filename, t_exec *exec)
+char	*gen_name(t_exec *exec, int i)
 {
-	int	fd;
+	char	*nb;
 
-	fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC,
-			S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH, 0777);
-	if (fd == -1)
-		return (print_error("file creation failed"));
-	exec->hd.cpt_close++;
-	return (fd);
+	nb = ft_itoa(i);
+	if (!nb)
+	{
+		print_error("malloc fail, gen_name()");
+		return (NULL);
+	}
+	exec->hd.tab_of_name_file[i] = ft_strjoin("hold/temp", nb, 0);
+	if (!exec->hd.tab_of_name_file[i])
+		print_error("malloc failed 1");
+	free(nb);
+	return (exec->hd.tab_of_name_file[i]);
 }
 
 int	init_file_heredoc(t_exec *exec)

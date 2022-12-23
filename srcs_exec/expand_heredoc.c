@@ -12,6 +12,18 @@
 
 #include "../headers/minishell.h"
 
+int	create_file(char *filename, t_exec *exec)
+{
+	int	fd;
+
+	fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC,
+			S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH, 0777);
+	if (fd == -1)
+		return (print_error("file creation failed"));
+	exec->hd.cpt_close++;
+	return (fd);
+}
+
 char	*ft_heredoc_expand(char *str, char **env)
 {
 	char	**exp;

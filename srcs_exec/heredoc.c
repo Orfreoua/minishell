@@ -12,23 +12,6 @@
 
 #include "../headers/minishell.h"
 
-char	*gen_name(t_exec *exec, int i)
-{
-	char	*nb;
-
-	nb = ft_itoa(i);
-	if (!nb)
-	{
-		print_error("malloc fail, gen_name()");
-		return (NULL);
-	}
-	exec->hd.tab_of_name_file[i] = ft_strjoin("hold/temp", nb, 0);
-	if (!exec->hd.tab_of_name_file[i])
-		print_error("malloc failed 1");
-	free(nb);
-	return (exec->hd.tab_of_name_file[i]);
-}
-
 char	*add_contents(char *contents, char *s)
 {
 	contents = ft_strjoin(contents, s, 1);
@@ -43,23 +26,44 @@ char	*add_contents(char *contents, char *s)
 	return (contents);
 }
 
-/*int	fill_heredoc(char *s, t_exec *exec, char *contents)
+void	end_heredoc(char **contents, t_exec *exec, char **s, int *i)
 {
-	s = ft_heredoc_expand(s, exec->env);
-	if (!s)
+	write(exec->hd.tab_fd[*i], *contents, ft_strlen(*contents));
+	if (!s && g_exit_ret != 424242)
+		print_error_heredoc(exec, *i);
+	if (*s)
+		free(*s);
+}
+
+int	boucle(char **contents, int *i, t_exec *exec)
+{
+	char	*s;
+
+	s = readline("> ");
+	if (!s || !strcmp(s, exec->hd.tab_exit_code[*i]))
+		return (end_heredoc(contents, exec, &s, i), 2);
+	else
 	{
-		free_string(contents);
-		return (print_error("2 heredoc()"));
+		s = ft_heredoc_expand(s, exec->env);
+		if (!s)
+		{
+			free_string(*contents);
+			return (print_error("2 heredoc()"));
+		}
+		*contents = add_contents(*contents, s);
+		if (!*contents)
+		{
+			free(s);
+			return (print_error("3 heredoc()"));
+		}
 	}
-	contents = add_contents(contents, s);
-	if (!contents)
-		return (print_error("3 heredoc()"));
-	return (OK);
-}*/
+	if (s)
+		free_string(s);
+	return (3);
+}
 
 int	to_fill_heredoc(int i, t_exec *exec)
 {
-	char	*s;
 	int		start;
 	char	*contents;
 
@@ -70,31 +74,12 @@ int	to_fill_heredoc(int i, t_exec *exec)
 	start = 0;
 	while (!start || strcmp(contents, exec->hd.tab_exit_code[i]))
 	{
-		start = 1;
-		s = readline("> ");
-		if (!s || !strcmp(s, exec->hd.tab_exit_code[i]))
-		{
-			write(exec->hd.tab_fd[i], contents, ft_strlen(contents));
-			if (!s && g_exit_ret != 424242)
-				print_error_heredoc(exec, i);
+		start = boucle(&contents, &i, exec);
+		if (start == 2)
 			break ;
-		}
-		else
-		{
-			s = ft_heredoc_expand(s, exec->env);
-			if (!s)
-			{
-				free_string(contents);
-				return (print_error("2 heredoc()"));
-			}
-			contents = add_contents(contents, s);
-			if (!contents)
-				return (print_error("3 heredoc()"));
-		}
-		free_string(s);
+		else if (start == ERROR)
+			return (ERROR);
 	}
-	if (s)
-		free_string(s);
 	free_string(contents);
 	return (OK);
 }
