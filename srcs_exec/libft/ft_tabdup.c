@@ -34,6 +34,6 @@ char	**ft_tabdup(char **tab)
 		}
 		i++;
 	}
-	new_tab[i] = 0;
+	new_tab[i] = NULL;
 	return (new_tab);
 }

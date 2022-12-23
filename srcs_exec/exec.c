@@ -40,7 +40,6 @@ int	load_pipe(t_data *data, t_exec	*exec, int cpt_pipe)
 {
 	pid_t	pid;
 
-	g_exit_ret = 0;
 	if (is_builtin(exec->pipe.cmd_splited[0]))
 		builtins_before_pipe(exec, &exec->pipe.cmd_splited[0], data);
 	pid = fork();

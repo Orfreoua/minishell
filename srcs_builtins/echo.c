@@ -56,4 +56,5 @@ void	builtin_echo(char *s)
 		write(1, &s[i++], 1);
 	if (nl == 0)
 		write(1, "\n", 1);
+	g_exit_ret = 0;
 }

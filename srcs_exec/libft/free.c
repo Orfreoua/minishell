@@ -23,7 +23,7 @@ int	free_tab_error(char **t, int n)
 	int	i;
 
 	i = 0;
-	while (t && t[i] && i < n)
+	while (t && i < n && t[i])
 	{
 		free(t[i]);
 		t[i] = NULL;
@@ -41,7 +41,7 @@ void	free_tab(char **t)
 	i = 0;
 	while (t && t[i])
 	{
-		free(t[i]);
+		free_string(t[i]);
 		t[i] = NULL;
 		i++;
 	}
