@@ -34,6 +34,7 @@ void	wait_child(void)
 		handle_termsig_display(signal);
 		g_exit_ret = signal + 128;
 	}
+	signal_catching_mode(INTERACTIVE);
 }
 
 void	wait_children(t_exec *exec, int nb_pipe)

@@ -49,7 +49,7 @@ void	signal_catching_mode(int mode)
 	}
 	else if (mode == PARENT_PROCESS)
 	{
-		signal(SIGINT, new_line);
+		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 	}
 	else if (mode == CHILD_PROCESS)
