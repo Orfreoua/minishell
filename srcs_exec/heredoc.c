@@ -91,11 +91,11 @@ int	to_fill_heredoc(int i, t_exec *exec)
 			if (!contents)
 				return (print_error("3 heredoc()"));
 		}
-		free(s);
+		free_string(s);
 	}
 	if (s)
-		free(s);
-	free(contents);
+		free_string(s);
+	free_string(contents);
 	return (OK);
 }
 

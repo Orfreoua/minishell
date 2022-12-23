@@ -91,7 +91,7 @@ int	builtin_export(t_exec *exec, char *s)
 	{
 		if (s[i] == '=')
 		{
-			if ((s[i - 1] == ' ') || (s[i + 1] && s[i + 1] == ' '))
+			if (s[i - 1] == ' ')
 				ft_putstr_fd(STDERR_FILENO,
 					"minishell: export: No such file or directory\n");
 			line = already_exists(exec->env, s, i);
