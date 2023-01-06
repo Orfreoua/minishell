@@ -47,15 +47,4 @@ void	free_tab(char **t)
 	}
 	free(t);
 	t = NULL;
-	// if (t[0])
-	// {
-	// 	while (t[i])
-	// 	{
-	// 		free(t[i]);
-	// 		t[i] = NULL;
-	// 		i++;
-	// 	}
-	// 	free(t);
-	// 	t = NULL;
-	// }
 }
