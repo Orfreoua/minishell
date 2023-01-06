@@ -79,7 +79,7 @@ RM 		= rm -f
 
 #valgrind --trace-children=yes --track-fds=yes -fsanitize=address valgrind --leak-check=full -fsanitize=address
 # make re && valgrind --log-file=toto --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=ignore_leak_rl ./minishell
-CFLAGS	= -Wall -Wextra -Werror -g3 #-fsanitize=leak
+CFLAGS	= -Wall -Wextra -Werror -g3 #-fsanitize=leak -fsanitize=address -fsanitize=undefined
 
 all:		${NAME}
 

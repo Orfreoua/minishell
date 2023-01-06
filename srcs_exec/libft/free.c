@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: orfreoua <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akefeder <akefeder@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:00:27 by orfreoua          #+#    #+#             */
-/*   Updated: 2022/12/09 15:00:30 by orfreoua         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:43:08 by akefeder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,23 @@ void	free_tab(char **t)
 	int	i;
 
 	i = 0;
-	if (t[0])
+	while (t && t[i])
 	{
-		while (t[i])
-		{
-			free(t[i]);
-			t[i] = NULL;
-			i++;
-		}
-		free(t);
-		t = NULL;
+		free_string(t[i]);
+		t[i] = NULL;
+		i++;
 	}
+	free(t);
+	t = NULL;
+	// if (t[0])
+	// {
+	// 	while (t[i])
+	// 	{
+	// 		free(t[i]);
+	// 		t[i] = NULL;
+	// 		i++;
+	// 	}
+	// 	free(t);
+	// 	t = NULL;
+	// }
 }
