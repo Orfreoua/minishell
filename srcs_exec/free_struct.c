@@ -35,7 +35,7 @@ void	free_heredoc(t_exec *exec)
 	}
 	free(exec->hd.tab_fd);
 	free_tab_error(exec->hd.tab_of_name_file, exec->hd.cpt_close);
-	free_tab(exec->hd.tab_exit_code);
+	free_tab_error(exec->hd.tab_exit_code, exec->hd.cpt_close);
 	exec->hd.nb = 0;
 	exec->hd.cpt_close = 0;
 }

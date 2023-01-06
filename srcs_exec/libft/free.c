@@ -39,12 +39,15 @@ void	free_tab(char **t)
 	int	i;
 
 	i = 0;
-	while (t && t[i])
+	if (t[0])
 	{
-		free_string(t[i]);
-		t[i] = NULL;
-		i++;
+		while (t[i])
+		{
+			free(t[i]);
+			t[i] = NULL;
+			i++;
+		}
+		free(t);
+		t = NULL;
 	}
-	free(t);
-	t = NULL;
 }
