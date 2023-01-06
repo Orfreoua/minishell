@@ -27,7 +27,7 @@ void	free_heredoc(t_exec *exec)
 
 	if (!exec->hd.nb)
 		return ;
-	i = 0;
+	i = 0; 
 	while (i < exec->hd.cpt_close)
 	{
 		close(exec->hd.tab_fd[i]);
