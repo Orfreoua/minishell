@@ -6,7 +6,7 @@
 /*   By: akefeder <akefeder@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 11:44:08 by akefeder          #+#    #+#             */
-/*   Updated: 2022/12/10 23:42:50 by akefeder         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:13:22 by akefeder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	gest_error(int code_err, t_data *data)
 	{
 		free_parse(data);
 		print_error("PROBLEM WITH COMMAND");
+		data = NULL;
 	}
 	else if (code_err == END)
 		free_parse(data);

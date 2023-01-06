@@ -6,7 +6,7 @@
 /*   By: akefeder <akefeder@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 04:53:51 by akefeder          #+#    #+#             */
-/*   Updated: 2022/12/10 21:17:05 by akefeder         ###   ########.fr       */
+/*   Updated: 2023/01/06 17:14:23 by akefeder         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,14 +115,11 @@ t_data	*ft_last_error(t_data *data)
 	slot = data;
 	while (slot != NULL)
 	{
-		if (slot->token == PIPE && slot->suiv->token == D_L_REDIR)
+		if (slot->token == PIPE && slot->suiv->token != PIPE)
 			slot = slot->suiv;
 		else if (ft_cmp_token(slot) == FOUND
 			&& ft_cmp_token(slot->suiv) == FOUND)
-		{
-			gest_error(ERR_CHECK, data);
-			slot = NULL;
-		}
+			return (gest_error(ERR_SPLIT, data), NULL);
 		else
 			slot = slot->suiv;
 	}
